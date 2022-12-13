@@ -8,11 +8,11 @@ import java.util.Set;
 public class Faculty {
     @Id
     @GeneratedValue
-   private Long id;
-   private String name;
-   private String color;
-   @OneToMany(mappedBy = "faculty")
-   private Set<Student> students;
+    private Long id;
+    private String name;
+    private String color;
+    @OneToMany(mappedBy = "faculty")
+    private Set<Student> students;
 
 //    public Set<Student> getStudents() {
 //        return students;
