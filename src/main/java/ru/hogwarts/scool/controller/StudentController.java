@@ -3,12 +3,14 @@ package ru.hogwarts.scool.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import ru.hogwarts.scool.model.Faculty;
 import ru.hogwarts.scool.model.Student;
 import ru.hogwarts.scool.service.StudentService;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/student")
@@ -37,9 +39,11 @@ public class StudentController {
     }
 
     @PostMapping
-    public Student createStudent(@RequestBody Student student) {
-
-        return studentService.createStudent(student);
+    public ResponseEntity<Student> createStudent(@RequestBody Student student) {
+        if (student.getId() != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(student));
     }
 
     @PutMapping("{id}")
@@ -73,7 +77,18 @@ public class StudentController {
     @GetMapping("/students/{id}")
     public Faculty findFacultyByStudents(@PathVariable Long id) {
         return studentService.findStudent(id).getFaculty();
-
-
     }
+    @GetMapping("/students/getAll")
+    public Integer getAllByName() {
+        return studentService.getAllByName();
+    }
+    @GetMapping("/student/findByAge")
+    public Integer findByAge(){
+        return studentService.findByAge();
+    }
+    @GetMapping("/student/getStudentById")
+    public Set<Student> getStudentById(){
+        return studentService.getStudentsById();
+    }
+
 }

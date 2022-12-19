@@ -44,8 +44,11 @@ public class FacultyService {
         return facultyRepository.findAll();
     }
 
-    public Faculty findFacultyByColorIgnoreCaseOrNameIgnoreCase(String color, String name) {
+    public Set<Faculty> findFacultyByColorIgnoreCaseOrNameIgnoreCase(String color, String name) {
         return facultyRepository.findFacultyByColorIgnoreCaseOrNameIgnoreCase(color, name);
     }
 
+    public Set<Faculty> findFacultyByColor(String color) {
+        return facultyRepository.findFacultiesByColor(color);
+    }
 }

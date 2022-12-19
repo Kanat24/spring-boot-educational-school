@@ -7,6 +7,7 @@ import ru.hogwarts.scool.repositories.FacultyRepository;
 import ru.hogwarts.scool.repositories.StudentRepository;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,5 +52,18 @@ public class StudentService {
     public Collection<Student> findStudentsByFacultyId(Long faculty_id) {
         return studentRepository.findStudentsByFacultyId(faculty_id);
     }
+
+    public Integer getAllByName() {
+        return studentRepository.getAllByName();
+    }
+
+    public Integer findByAge() {
+        return studentRepository.findByAge();
+    }
+
+    public Set<Student> getStudentsById() {
+        return studentRepository.findStudentsById();
+    }
+
 
 }

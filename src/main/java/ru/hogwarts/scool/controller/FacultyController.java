@@ -13,7 +13,7 @@ import ru.hogwarts.scool.service.FacultyService;
 import java.util.*;
 
 @RestController
-@RequestMapping("faculty")
+@RequestMapping("/faculty")
 public class FacultyController {
     private final FacultyService facultyService;
     private final StudentRepository studentRepository;
@@ -28,13 +28,13 @@ public class FacultyController {
     }
 
     @GetMapping
-    public ResponseEntity<Faculty> findFaculties(@RequestParam(required = false) String color,
-                                                 @RequestParam(required = false) String name) {
-        if (color != null && !color.isBlank() || name != null && !name.isBlank()) {
-            return ResponseEntity.ok(facultyService.findFacultyByColorIgnoreCaseOrNameIgnoreCase(color, name));
+    public Set<Faculty> findFaculties(@RequestParam(required = false) String color,
+                                      @RequestParam(required = false) String name) {
+        if (name == null) {
+            return facultyService.findFacultyByColor(color);
         }
-        ;
-        return ResponseEntity.notFound().build();
+
+        return (Set<Faculty>) facultyService.findFacultyByColorIgnoreCaseOrNameIgnoreCase(color, name);
     }
 
     @GetMapping("{id}")
@@ -60,7 +60,7 @@ public class FacultyController {
         return ResponseEntity.ok(foundFaculty);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Faculty> deleteFaculty(@PathVariable Long id) {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
