@@ -78,17 +78,25 @@ public class StudentController {
     public Faculty findFacultyByStudents(@PathVariable Long id) {
         return studentService.findStudent(id).getFaculty();
     }
+
     @GetMapping("/students/getAll")
     public Integer getAllByName() {
         return studentService.getAllByName();
     }
+
     @GetMapping("/student/findByAge")
-    public Integer findByAge(){
+    public Integer findByAge() {
         return studentService.findByAge();
     }
+
     @GetMapping("/student/getStudentById")
-    public Set<Student> getStudentById(){
+    public Set<Student> getStudentById() {
         return studentService.getStudentsById();
     }
 
+    @GetMapping("/student/name/{name}")
+    ResponseEntity<Collection<Student>> findByNameIgnoreCase(@PathVariable("name") String name) {
+        Collection<Student> students = studentService.findByNameIgnoreCase(name);
+        return ResponseEntity.ok(students);
+    }
 }

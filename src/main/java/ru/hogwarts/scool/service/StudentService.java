@@ -65,5 +65,8 @@ public class StudentService {
         return studentRepository.findStudentsById();
     }
 
+    public Collection<Student> findByNameIgnoreCase(String name){
+        return studentRepository.findByNameIgnoreCase(name);
+    }
 
 }
