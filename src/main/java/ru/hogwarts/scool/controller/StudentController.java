@@ -40,9 +40,9 @@ public class StudentController {
 
     @PostMapping
     public ResponseEntity<Student> createStudent(@RequestBody Student student) {
-        if (student.getId() != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
+//        if (student.getId() != null) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+//        }
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(student));
     }
 
