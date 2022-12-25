@@ -27,15 +27,15 @@ public class FacultyController {
         this.facultyRepository = facultyRepository;
     }
 
-//    @GetMapping
-//    public Set<Faculty> findFaculties(@RequestParam(required = false) String color,
-//                                      @RequestParam(required = false) String name) {
-//        if (name == null) {
-//            return facultyService.findFacultyByColor(color);
-//        }
-//
-//        return (Set<Faculty>) facultyService.findFacultyByColorIgnoreCaseOrNameIgnoreCase(color, name);
-//    }
+    @GetMapping
+    public Set<Faculty> findFaculties(@RequestParam(required = false) String color,
+                                      @RequestParam(required = false) String name) {
+        if (name == null) {
+            return facultyService.findFacultyByColor(color);
+        }
+
+        return (Set<Faculty>) facultyService.findFacultyByColorIgnoreCaseOrNameIgnoreCase(color, name);
+    }
 
     @GetMapping("{id}")
     public ResponseEntity<Faculty> getFacultyInfo(@PathVariable Long id) {
