@@ -73,5 +73,11 @@ public class FacultyController {
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
+    @GetMapping("/longestName")
+    public ResponseEntity<String> longestNameOrFaculty(){
+        String longestName = facultyRepository.findAll().stream()
+                .map(Faculty::getName).max(Comparator.comparing(String::length)).get();
+        return ResponseEntity.ok(longestName);
+    }
 
 }

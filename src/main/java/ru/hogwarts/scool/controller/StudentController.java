@@ -6,19 +6,23 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ru.hogwarts.scool.model.Faculty;
 import ru.hogwarts.scool.model.Student;
+import ru.hogwarts.scool.repositories.StudentRepository;
 import ru.hogwarts.scool.service.StudentService;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/student")
 public class StudentController {
     private final StudentService studentService;
+    private final StudentRepository studentRepository;
 
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService,
+                             StudentRepository studentRepository) {
         this.studentService = studentService;
+        this.studentRepository = studentRepository;
     }
 
     @GetMapping
@@ -98,5 +102,24 @@ public class StudentController {
     ResponseEntity<Collection<Student>> findByNameIgnoreCase(@PathVariable("name") String name) {
         Collection<Student> students = studentService.findByNameIgnoreCase(name);
         return ResponseEntity.ok(students);
+    }
+    @GetMapping("/student/findAllName/")
+    ResponseEntity <String> findAllNameStudents(){
+        String studentsName = studentRepository.findAll().stream()
+                .map(Student::getName).map(String::toUpperCase)
+                .filter(name -> (name.charAt(0)=='A'))
+                .sorted().collect(Collectors.joining(", "));
+        return ResponseEntity.ok(studentsName);
+    }
+    @GetMapping("/student/getAverageAge/")
+    ResponseEntity<Double> findAverageAgeStudents(){
+        double averageAge= studentRepository.findAll().stream()
+                .mapToInt(Student::getAge).summaryStatistics().getAverage();
+        return ResponseEntity.ok(averageAge);
+    }
+    @GetMapping("/returnInteger")
+    Integer returnInteger(){
+        int sum = Stream.iterate(1, a -> a +1).limit(1_000_000).parallel().reduce(0, (a, b) -> a + b );
+        return sum;
     }
 }
