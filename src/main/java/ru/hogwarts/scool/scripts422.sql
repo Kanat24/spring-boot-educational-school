@@ -1,16 +1,16 @@
 CREATE TABLE human
 (
-    id             INTEGER,
-    name           TEXT PRIMARY KEY,
+    id             INTEGER PRIMARY KEY,
+    name           TEXT,
     age            INTEGER,
     driver_license BOOLEAN,
-    car_id         TEXT REFERENCES car(id)
+    car_id         INTEGER REFERENCES car(id)
 );
 CREATE TABLE car
 (
-    id INTEGER PRIMARY KEY,
+    id bigserial PRIMARY KEY,
     brand TEXT,
     model TEXT,
-    price INTEGER
+    price DECIMAL
 
 )
