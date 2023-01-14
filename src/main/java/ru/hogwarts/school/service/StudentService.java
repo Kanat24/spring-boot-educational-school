@@ -1,11 +1,11 @@
-package ru.hogwarts.scool.service;
+package ru.hogwarts.school.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import ru.hogwarts.scool.model.Student;
-import ru.hogwarts.scool.repositories.FacultyRepository;
-import ru.hogwarts.scool.repositories.StudentRepository;
+import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repositories.FacultyRepository;
+import ru.hogwarts.school.repositories.StudentRepository;
 
 import java.util.Collection;
 import java.util.List;
@@ -103,7 +103,7 @@ public class StudentService {
         return students;
     }
 
-    public List<Student> getAllStudentsAndNameSynchronized(){
+    public List<Student> getAllStudentsAndNameSynchronized() {
         List<Student> students2 = studentRepository.findAll();
         methodSynchronized(students2.stream().map(Student::getName).limit(1).collect(Collectors.joining()));
         methodSynchronized(students2.stream().map(Student::getName).skip(1).limit(1).collect(Collectors.joining(",")));
@@ -120,8 +120,8 @@ public class StudentService {
         return students2;
     }
 
-    public static void methodSynchronized(String name){
-        synchronized (flag){
+    public static void methodSynchronized(String name) {
+        synchronized (flag) {
             System.out.println(name);
         }
     }

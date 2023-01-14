@@ -1,14 +1,12 @@
-package ru.hogwarts.scool.controller;
+package ru.hogwarts.school.controller;
 
-import ch.qos.logback.core.joran.conditional.IfAction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.hogwarts.scool.model.Faculty;
-import ru.hogwarts.scool.model.Student;
-import ru.hogwarts.scool.repositories.FacultyRepository;
-import ru.hogwarts.scool.repositories.StudentRepository;
-import ru.hogwarts.scool.service.FacultyService;
+import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.repositories.FacultyRepository;
+import ru.hogwarts.school.repositories.StudentRepository;
+import ru.hogwarts.school.service.FacultyService;
 
 import java.util.*;
 
@@ -60,7 +58,7 @@ public class FacultyController {
         return ResponseEntity.ok(foundFaculty);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Faculty> deleteFaculty(@PathVariable Long id) {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
@@ -73,8 +71,9 @@ public class FacultyController {
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
+
     @GetMapping("/longestName")
-    public ResponseEntity<String> longestNameOrFaculty(){
+    public ResponseEntity<String> longestNameOrFaculty() {
         String longestName = facultyRepository.findAll().stream()
                 .map(Faculty::getName).max(Comparator.comparing(String::length)).get();
         return ResponseEntity.ok(longestName);

@@ -1,13 +1,12 @@
-package ru.hogwarts.scool.controller;
+package ru.hogwarts.school.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import ru.hogwarts.scool.model.Faculty;
-import ru.hogwarts.scool.model.Student;
-import ru.hogwarts.scool.repositories.StudentRepository;
-import ru.hogwarts.scool.service.StudentService;
+import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repositories.StudentRepository;
+import ru.hogwarts.school.service.StudentService;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -103,31 +102,36 @@ public class StudentController {
         Collection<Student> students = studentService.findByNameIgnoreCase(name);
         return ResponseEntity.ok(students);
     }
+
     @GetMapping("/student/findAllName/")
-    ResponseEntity <String> findAllNameStudents(){
+    ResponseEntity<String> findAllNameStudents() {
         String studentsName = studentRepository.findAll().stream()
                 .map(Student::getName).map(String::toUpperCase)
-                .filter(name -> (name.charAt(0)=='A'))
+                .filter(name -> (name.charAt(0) == 'A'))
                 .sorted().collect(Collectors.joining(", "));
         return ResponseEntity.ok(studentsName);
     }
+
     @GetMapping("/student/getAverageAge/")
-    ResponseEntity<Double> findAverageAgeStudents(){
-        double averageAge= studentRepository.findAll().stream()
+    ResponseEntity<Double> findAverageAgeStudents() {
+        double averageAge = studentRepository.findAll().stream()
                 .mapToInt(Student::getAge).summaryStatistics().getAverage();
         return ResponseEntity.ok(averageAge);
     }
+
     @GetMapping("/returnInteger")
-    Integer returnInteger(){
-        int sum = Stream.iterate(1, a -> a +1).limit(1_000_000).parallel().reduce(0, (a, b) -> a + b );
+    Integer returnInteger() {
+        int sum = Stream.iterate(1, a -> a + 1).limit(1_000_000).parallel().reduce(0, (a, b) -> a + b);
         return sum;
     }
+
     @GetMapping("/getListStudent")
-   List <Student> getListStudents(){
+    List<Student> getListStudents() {
         return studentService.getAllStudentsAndName();
     }
+
     @GetMapping("/getAllStudentsAndNameSynchronized")
-   List<Student> getAllStudentsAndNameSynchronized(){
+    List<Student> getAllStudentsAndNameSynchronized() {
         return studentService.getAllStudentsAndNameSynchronized();
     }
 }

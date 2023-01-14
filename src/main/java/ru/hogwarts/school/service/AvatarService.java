@@ -1,4 +1,4 @@
-package ru.hogwarts.scool.service;
+package ru.hogwarts.school.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,10 +7,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import ru.hogwarts.scool.model.Avatar;
-import ru.hogwarts.scool.model.Student;
-import ru.hogwarts.scool.repositories.AvatarRepository;
-import ru.hogwarts.scool.repositories.StudentRepository;
+import ru.hogwarts.school.model.Avatar;
+import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repositories.AvatarRepository;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -19,8 +18,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;

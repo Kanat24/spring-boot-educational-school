@@ -1,12 +1,11 @@
-package ru.hogwarts.scool.service;
+package ru.hogwarts.school.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import ru.hogwarts.scool.model.Faculty;
-import ru.hogwarts.scool.model.Student;
-import ru.hogwarts.scool.repositories.FacultyRepository;
-import ru.hogwarts.scool.repositories.StudentRepository;
+import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.repositories.FacultyRepository;
+import ru.hogwarts.school.repositories.StudentRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;

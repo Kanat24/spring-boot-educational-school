@@ -1,4 +1,4 @@
-package ru.hogwarts.scool.controller;
+package ru.hogwarts.school.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -6,8 +6,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.hogwarts.scool.model.Avatar;
-import ru.hogwarts.scool.service.AvatarService;
+import ru.hogwarts.school.model.Avatar;
+import ru.hogwarts.school.service.AvatarService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

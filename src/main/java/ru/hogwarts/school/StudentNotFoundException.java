@@ -1,4 +1,4 @@
-package ru.hogwarts.scool;
+package ru.hogwarts.school;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
