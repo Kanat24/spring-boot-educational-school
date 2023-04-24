@@ -1,3 +1,4 @@
-##spring-boot-educational-institutions
+# Course work
+## Educational application, Hogwarts School.
 
-Educational application, Hogwarts School.
+
